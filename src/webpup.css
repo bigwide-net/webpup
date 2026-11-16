@@ -1,9 +1,9 @@
-/* webpup's default look. Built into webpup.css after the post styles of t-lib-postviewer and the
+/* webpup's default look. Built into webpup.css after the post styles of postviewer and the
    follow dialog of lib/follow (scripts/build.mjs).
 
    Theming: /theme.css is loaded after this file. A theme usually only sets the --wp-* tokens below
    (for light and dark), but may restyle anything: the classes are wp-* (page), post* (posts, from
-   t-lib-postviewer) and fd-* (the follow dialog). A theme color in host-meta.json
+   postviewer) and fd-* (the follow dialog). A theme color in host-meta.json
    (https://bigwide.net/ns/theme-color) sets --wp-accent, unless theme.css has any rules. */
 
 :root {
@@ -57,7 +57,7 @@
     color-scheme: dark;
 }
 
-/* The tokens of the post renderer (t-lib-postviewer) and of the follow dialog (lib/follow). */
+/* The tokens of the post renderer (postviewer) and of the follow dialog (follow), both from bigwide-net/lib. */
 :root {
     --pv-text: var(--wp-text);
     --pv-text-strong: var(--wp-text);
@@ -205,6 +205,15 @@ body:not([data-state="loading"]) .wp-loading { display: none; }
     border-radius: var(--wp-radius); scroll-margin-top: 16px; transition: box-shadow 0.3s;
 }
 .wp-posts .postCard.wp-target { box-shadow: 0 0 0 3px var(--wp-accent); }
+/* Under the audio/video player: duration, format, size, Download; the other attachments (posts.ts) */
+.wp-posts .postMedia audio, .wp-posts .postMedia video { width: 100%; }
+.wp-media-info { margin: 6px 0 14px; color: var(--wp-muted); font: 13px/1.5 var(--wp-ui-font); }
+.wp-media-info a { color: inherit; }
+.wp-attachments { margin: 14px 0 0; padding: 0; list-style: none; font: 14px/1.5 var(--wp-ui-font); }
+.wp-attachments li { display: flex; flex-wrap: wrap; gap: 0 8px; align-items: baseline; padding: 3px 0; }
+.wp-attachments li::before { content: '↓'; color: var(--wp-muted); }
+.wp-attachments a { font-weight: 600; }
+.wp-attachment-details { color: var(--wp-muted); font-size: 13px; }
 /* The post that j/k/n/p went to (keys.ts) */
 .wp-posts .postCard.wp-current { box-shadow: 0 0 0 2px var(--wp-accent); outline: none; }
 .wp-posts .postHeader { margin-bottom: 10px; }

@@ -14,7 +14,7 @@
 // files (feed.000003.json is page 3), so their URLs never change. A post is its page + #<item id>.
 // Both styles are always understood; links use the style the server supports (detectUrlStyle).
 //
-// Navigation works like Downread's router (t-lib-ui/router): clicks on links to pages of the site
+// Navigation works like a client-side router: clicks on links to pages of the site
 // change the URL with pushState and render the page without loading it again.
 
 export type InfoPage = 'about' | 'following' | 'contact';

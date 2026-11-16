@@ -1,14 +1,14 @@
 // A feed's page: its newest posts (the feed file) or one of its archives (RFC-7), each post a card
-// of t-lib-postviewer, with Older/Newer links between the archive pages.
+// of postviewer, with Older/Newer links between the archive pages.
 import type { EmbedConsentApi } from '@lib/postviewer/src/embed-consent';
 import { addHtml, newHtml } from '@lib/postviewer/src/dom';
 import { loadExternalScripts } from '@lib/postviewer/src/external-scripts';
 import { createPostParts } from '@lib/postviewer/src/post-card';
-import type { EmbedService } from '@lib/postviewer/src/schema-copy/api-schema';
+import type { EmbedService } from '@lib/postviewer/src/types';
 import { icon } from '@lib/socialspec/src/icons';
 import type { ContactEntry } from '@lib/socialspec/src/vcard';
 import { loadArchive, type Config, type Site, type SiteFeed } from './data';
-import { embedScripts, itemId, itemTags, toPost, type JsonFeed, type JsonFeedItem } from './jsonfeed';
+import { attachmentDetails, embedScripts, fileName, itemAttachments, itemId, itemTags, toPost, type JsonFeed, type JsonFeedItem } from './jsonfeed';
 import { href, type Route } from './router';
 
 /** How many archives "Older posts" looks through for the first post the feed file doesn't have. */
@@ -77,10 +77,36 @@ function replyHref(email: ContactEntry, title: string | undefined, url: string):
     return `${email.href!.split('?')[0]}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`\n\n> ${url}\n`)}`;
 }
 
+const downloadLink = (url: string, text: string) => newHtml('a', {href: url, download: '', target: '_blank', rel: 'noopener'}, text);
+
+/** Under the player: the enclosure's duration, format and size, and a download link. Then the
+ *  other attachments (not the played file nor the lead image) as download links. */
+function addAttachments(parts: HTMLElement[], item: JsonFeedItem, imageUrl: string | undefined): void {
+    const all = itemAttachments(item);
+    const player = parts.findIndex(p => p.classList.contains('postMedia'));
+    const played = player >= 0 ? all.find(a => a.url == parts[player].querySelector('audio, video')?.getAttribute('src')) : undefined;
+    if (played)
+        parts.splice(player + 1, 0, newHtml('p', {class: 'wp-media-info'},
+            [...attachmentDetails(played).flatMap(d => [newHtml('span', {}, d), ' · ']), downloadLink(played.url!, 'Download')]));
+    const others = all.filter(a => a != played && a.url != imageUrl);
+    if (!others.length)
+        return;
+    const list = newHtml('ul', {class: 'wp-attachments', 'aria-label': 'Attachments'});
+    for (const a of others) {
+        const details = attachmentDetails(a);
+        addHtml(list, 'li', {}, [downloadLink(a.url!, a.title?.trim() || fileName(a.url!)),
+            ...details.length ? [newHtml('span', {class: 'wp-attachment-details'}, details.join(' · '))] : []]);
+    }
+    // After the body, before tags and actions.
+    const body = parts.findIndex(p => p.classList.contains('postBody'));
+    parts.splice(body >= 0 ? body + 1 : parts.length, 0, list);
+}
+
 function postCard(item: JsonFeedItem, index: number, feed: SiteFeed, page: Route, ctx: PostContext): HTMLElement {
-    const post = toPost(item, index, ctx.site.origin + '/');
+    const post = toPost(item, ctx.site.origin + '/');
     const id = itemId(item);
     const parts = createPostParts(post, {feedName: feedTitle(feed), feedHref: href(feedRoute(feed)), consent: ctx.consent});
+    addAttachments(parts, item, post.imageUrl);
     const tags = itemTags(item);
     if (tags.length)
         parts.push(newHtml('ul', {class: 'wp-tags', 'aria-label': 'Tags'}, tags.map(t => newHtml('li', {}, t))));

@@ -2,14 +2,15 @@
 // webpup-themes/ (index.json, <id>.css, <id>.jpg thumbnails from themes/thumbs/, see
 // scripts/make-thumbnails.mjs). `node scripts/build.mjs debug` keeps the files readable (with a
 // source map). No webpup-config.json: without one, the page shows the theme selector.
-// The shared libraries (@lib/*: postviewer, socialspec, follow) come from ../../t/lib (tsconfig.json).
+// The shared libraries (@lib/*: postviewer, socialspec, follow) come from ../lib, a checkout of
+// bigwide-net/lib (tsconfig.json).
 import * as esbuild from 'esbuild';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const lib = path.resolve(dir, '../../t/lib');
+const lib = path.resolve(dir, '../lib');
 const out = path.join(dir, 'dist');
 const dev = process.argv[2] == 'debug';
 

@@ -9,7 +9,7 @@ const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../examp
 const O = 'https://tim.example';
 const write = (file, content) => {
     fs.mkdirSync(path.dirname(path.join(dir, file)), { recursive: true });
-    fs.writeFileSync(path.join(dir, file), typeof content == 'string' ? content : JSON.stringify(content, null, 2) + '\n');
+    fs.writeFileSync(path.join(dir, file), typeof content == 'string' || Buffer.isBuffer(content) ? content : JSON.stringify(content, null, 2) + '\n');
 };
 const RFC7 = 'https://github.com/bigwide-net/RFCs/blob/main/RFC-7-Feed-Publishing-with-PUPS.md';
 
@@ -100,6 +100,32 @@ write('.well-known/following.opml', `<?xml version="1.0" encoding="UTF-8"?>
 </opml>
 `);
 
+// A podcast episode (post 46): a short generated chime as WAV (8 kHz, 8 bit, mono), and a transcript.
+const RATE = 8000, SECONDS = 6;
+const samples = Buffer.alloc(RATE * SECONDS);
+for (let i = 0; i < samples.length; i++) {
+    const t = i / RATE;
+    const v = [523.25, 659.25, 783.99, 1046.5].reduce((sum, f, k) => {
+        const start = k * 0.6;
+        return t < start ? sum : sum + Math.sin(2 * Math.PI * f * (t - start)) * Math.exp(-(t - start) * 1.6) * 0.22;
+    }, 0);
+    samples[i] = Math.round(128 + 127 * Math.max(-1, Math.min(1, v)));
+}
+const wavHeader = Buffer.alloc(44);
+wavHeader.write('RIFF', 0); wavHeader.writeUInt32LE(36 + samples.length, 4); wavHeader.write('WAVEfmt ', 8);
+wavHeader.writeUInt32LE(16, 16); wavHeader.writeUInt16LE(1, 20); wavHeader.writeUInt16LE(1, 22); wavHeader.writeUInt32LE(RATE, 24);
+wavHeader.writeUInt32LE(RATE, 28); wavHeader.writeUInt16LE(1, 32); wavHeader.writeUInt16LE(8, 34); wavHeader.write('data', 36); wavHeader.writeUInt32LE(samples.length, 40);
+const wav = Buffer.concat([wavHeader, samples]);
+write('feed/media/episode-1.wav', wav);
+const transcript = `Episode 1: Why feeds still matter\n\n[chime]\n\nThat's all for today. Thanks for listening.\n`;
+write('feed/media/episode-1-transcript.txt', transcript);
+const episode = base => ({ ...base, title: 'Episode 1: Why feeds still matter',
+    content_html: '<p>The first episode of a very short podcast: a chime, and a transcript to go with it.</p>',
+    attachments: [
+        { url: `${O}/feed/media/episode-1.wav`, mime_type: 'audio/wav', size_in_bytes: wav.length, duration_in_seconds: SECONDS },
+        { url: `${O}/feed/media/episode-1-transcript.txt`, mime_type: 'text/plain', title: 'Transcript', size_in_bytes: Buffer.byteLength(transcript) },
+    ] });
+
 // The main feed: 47 posts, newest first. Archives hold 20 each, the newest (000002) holds 7.
 const TOTAL = 47;
 const date = i => new Date(Date.UTC(2026, 10, 15, 9, 30) - i * 2 * 86400000).toISOString().replace('.000', '');
@@ -107,6 +133,8 @@ const item = i => {
     const n = TOTAL - i; // post number, 1 = oldest
     const id = `p-${String(n).padStart(4, '0')}-exampleXyz9`;
     const base = { id, date_published: date(i) };
+    if (n == 46)
+        return episode(base);
     switch ((n + 3) % 7) { // the newest post has an image
         case 0: return { ...base, content_text: `Short note #${n}: a post without a title, like a microblog.\n\nIt has two paragraphs.` };
         case 1: return { ...base, title: `A walk along the river (${n})`, image: `${O}/feed/images/2026/trail.svg`, _image: { alt: 'A trail by the water' },

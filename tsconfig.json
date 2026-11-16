@@ -12,7 +12,7 @@
     "noEmit": true,
     "types": ["jest"],
     "baseUrl": ".",
-    "paths": { "@lib/*": ["../../t/lib/*"] }
+    "paths": { "@lib/*": ["../lib/*"] }
   },
   "include": ["src/**/*", "test/**/*"]
 }

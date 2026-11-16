@@ -157,7 +157,7 @@ owner can also edit `host-meta.json` by hand.
 - **Links** in the site's Markdown (pages, footer, `about.md`) to the Markdown file of a page go to
   that page, e.g. `[Imprint](/pups/pages/imprint.md)`. Links to the site open in the same tab,
   others in a new one.
-- Only files on the site's own origin are used. They are rendered by `t-lib-postviewer`'s Markdown
+- Only files on the site's own origin are used. They are rendered by postviewer's Markdown
   renderer, without raw HTML.
 
 ## Configuration
@@ -189,7 +189,7 @@ silly (Retro). See [themes/README.md](themes/README.md).
 
 ## The Follow button
 
-The follow dialog of rssdirectory.org and sodir.org (`lib/follow`): the visitor picks their reader
+The follow dialog of rssdirectory.org and sodir.org (`follow` in bigwide-net/lib): the visitor picks their reader
 (Downread first, then Feedbin, Feedly, Inoreader, NetNewsWire, NewsBlur, HyperTexting on iOS, or a
 custom subscribe URL), webpup opens the feed there; "Remember" makes the next Follow go straight to
 it. The feed URL can also be copied. The list is `READERS` in `src/follow.ts`. **TODO:** check that
@@ -198,6 +198,7 @@ every listed reader subscribes to JSON Feeds (RFC-7 feeds are JSON only), and dr
 ## Development
 
 ```bash
+git clone https://github.com/bigwide-net/lib ../lib && (cd ../lib && npm install)   # once
 bin/dev.sh               # debug build + dev server on :8095 with the example site, plain URLs
 bin/dev.sh --rewrite     # ... with the /p/* rewrite (pretty URLs)
 bin/dev.sh --rewrite --port 8096 --theme themes/night.css --no-root --data ../my-site
@@ -218,18 +219,20 @@ days: to compare both modes, run them on different ports.
 TypeScript in `src/`, bundled with esbuild:
 
 - `router.ts`: the URL scheme (both styles), detecting the server's style, navigation without
-  reload (like Downread's router, `t-lib-ui/router`).
+  reload.
 - `data.ts`: loading `host-meta.json`, the SocialSpec files, the feeds and archives, the config.
-- `jsonfeed.ts`: JSON Feed items (with `_source`, `_image`) as posts of `t-lib-postviewer`.
+- `jsonfeed.ts`: JSON Feed items (with `_source`, `_image`) as posts of postviewer.
 - `view.ts`: header, tabs, About/Following/Contact; `posts.ts`: the feed and archive pages.
 - `follow.ts`: the follow dialog's markup and the Follow button.
 - `themes.ts`: the theme color, and the theme selector.
 
-It uses three libraries of the `t` repository, expected at `../../t/lib` (`@lib/*` in
-`tsconfig.json` and `jest.config.js`): `postviewer` (post rendering and sanitizing with DOMPurify,
-Markdown), `socialspec` (the about.md, OPML and vCard parsers) and `follow` (the follow dialog).
+It uses three libraries of [bigwide-net/lib](https://github.com/bigwide-net/lib), checked out next
+to this repository (`../lib`; `@lib/*` in `tsconfig.json` and `jest.config.js`): `postviewer` (post
+rendering and sanitizing with DOMPurify, Markdown), `socialspec` (the about.md, OPML and vCard
+parsers) and `follow` (the follow dialog). `bin/dev.sh` checks it out and installs it if it's
+missing.
 
 ## Not done yet
 
-- Comments of feeds with RFC-4 submissions (`t-lib-postviewer` can render them).
+- Comments of feeds with RFC-4 submissions (postviewer can render them).
 - Search engines see the page only after running the script; `index.html` has no content of its own.

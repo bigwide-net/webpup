@@ -110,4 +110,17 @@ describe('view', () => {
         renderPage(app, s, {page: 'feed'}, {site: s, consent: createConsent('on')}, () => {}, selector);
         expect([...app.children].map(c => c.tagName.toLowerCase())).toEqual(['header', 'nav', 'main', 'section', 'footer']);
     });
+
+    it('shows duration, format, size and a download link under the player, and the other attachments', () => {
+        const episode = {id: 'e1', title: 'Episode', content_html: '<p>Notes</p>', image: `${O}/cover.jpg`, attachments: [
+            {url: `${O}/ep.mp3`, mime_type: 'audio/mpeg', size_in_bytes: 43200000, duration_in_seconds: 3600},
+            {url: `${O}/cover.jpg`, mime_type: 'image/jpeg'},
+            {url: `${O}/transcript.txt`, mime_type: 'text/plain', title: 'Transcript', size_in_bytes: 2048},
+        ]};
+        const card = render(site({feeds: [feed(undefined, [episode])]}), {page: 'feed'}).app.querySelector('.postCard')!;
+        expect(card.querySelector('.wp-media-info')?.textContent).toBe('1:00:00 · MP3 · 41 MB · Download');
+        expect(card.querySelector('.wp-media-info a')?.getAttribute('href')).toBe(`${O}/ep.mp3`);
+        expect([...card.querySelectorAll('.wp-attachments li')].map(li => li.textContent)).toEqual(['TranscriptTXT · 2.0 KB']);
+        expect(card.querySelector('.postMedia + .wp-media-info')).not.toBeNull();
+    });
 });

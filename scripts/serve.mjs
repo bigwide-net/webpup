@@ -24,7 +24,7 @@ const dist = path.join(dir, 'dist');
 const config = opt('--config');
 const WEBPUP = ['/index.html', '/webpups.js', '/webpup.css', '/theme.css'];
 
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.md': 'text/markdown', '.jpeg': 'image/jpeg',
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.md': 'text/markdown', '.jpeg': 'image/jpeg', '.wav': 'audio/wav', '.txt': 'text/plain',
     '.vcf': 'text/vcard', '.opml': 'text/x-opml', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp' };
 const TEXT = new Set(['.json', '.md', '.vcf', '.opml', '.svg']);
 
