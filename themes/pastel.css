@@ -1,0 +1,28 @@
+/* webpup theme "pastel": soft colors, round shapes, gentle shadows instead of lines. */
+:root:root {
+    --wp-bg: #fbf4fb;
+    --wp-surface: #ffffff;
+    --wp-text: #3c2f4d;
+    --wp-text-2: #5d4f6e;
+    --wp-muted: #8f82a0;
+    --wp-line: #efe2f3;
+    --wp-line-soft: #f5edf7;
+    --wp-accent: #b05fd6;
+    --wp-on-accent: #ffffff;
+    --wp-banner: #f3c4e6;
+    --wp-ui-font: 'Avenir Next', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+    --wp-font: 'Avenir Next', 'Nunito', 'Segoe UI', system-ui, sans-serif;
+    --wp-radius: 28px;
+    color-scheme: light;
+}
+body { background: linear-gradient(160deg, #fdf0f7 0%, #f1efff 55%, #e9f7f4 100%) fixed; }
+.wp-header, .wp-tabs, .wp-posts .postCard, .wp-about, .wp-following, .wp-contact, .wp-page, .wp-pages, .wp-notfound {
+    border-color: transparent; box-shadow: 0 10px 30px rgba(120, 70, 150, 0.10);
+}
+.wp-tabs { margin-top: 0; }
+.wp-avatar { border-color: #fff; box-shadow: 0 0 0 4px #f3c4e6; }
+.wp-tab[aria-current="page"] { color: var(--wp-accent); border-bottom-color: var(--wp-accent); }
+.wp-posts { gap: 22px; }
+.wp-posts .postImage img, .postBody img { border-radius: 18px; }
+.wp-tags li { background: #f6e8fb; color: #7b3fa0; }
+.wp-theme img { border-radius: 16px; }

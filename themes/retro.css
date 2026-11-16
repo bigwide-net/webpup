@@ -1,0 +1,39 @@
+/* webpup theme "retro": a home page from 1998. Gray windows with title bars on a teal desktop,
+   beveled buttons, blue links. */
+:root:root {
+    --wp-bg: #008080;
+    --wp-surface: #c0c0c0;
+    --wp-text: #000000;
+    --wp-text-2: #000000;
+    --wp-muted: #404040;
+    --wp-line: #808080;
+    --wp-line-soft: #a0a0a0;
+    --wp-accent: #000080;
+    --wp-on-accent: #ffffff;
+    --wp-banner: #000080;
+    --wp-ui-font: Tahoma, Verdana, 'MS Sans Serif', Geneva, sans-serif;
+    --wp-font: 'Times New Roman', Times, serif;
+    --wp-radius: 0;
+    color-scheme: light;
+}
+.wp-header, .wp-tabs, .wp-posts .postCard, .wp-about, .wp-following, .wp-contact, .wp-page, .wp-pages, .wp-notfound {
+    border: 2px solid; border-color: #ffffff #404040 #404040 #ffffff; box-shadow: 1px 1px 0 #000;
+}
+.wp-header::before, .wp-posts .postCard::before {
+    display: block; padding: 3px 8px; background: linear-gradient(90deg, #000080, #1084d0); color: #fff; font: bold 13px Tahoma, Verdana, sans-serif;
+}
+.wp-header::before { content: 'Welcome to my homepage!'; }
+.wp-posts .postCard::before { content: 'Post.txt'; margin: -26px -28px 16px; }
+.wp-tabs { margin-top: 6px; border-radius: 0; }
+.wp-tab { color: #000; font-weight: 400; }
+.wp-tab[aria-current="page"] { font-weight: 700; border-bottom-color: #000080; }
+.wp-avatar { border-radius: 0; border: 3px solid; border-color: #ffffff #404040 #404040 #ffffff; }
+.wp-name { font-family: 'Comic Sans MS', 'Comic Sans', var(--wp-ui-font); color: #000080; }
+.wp-posts .postTitle a, .postBody a, .wp-md a { color: #0000ee; text-decoration: underline; }
+.wp-btn, .wp-follow .follow-label, .wp-follow-chevron, .wp-pager-link, .wp-icon-btn {
+    border-radius: 0; border: 2px solid; border-color: #ffffff #404040 #404040 #ffffff; background: #c0c0c0; color: #000; box-shadow: none;
+}
+.wp-btn-accent:hover, .wp-follow-chevron:hover { background: #d4d0c8; color: #000; }
+.wp-footer, .wp-themes, .wp-theme { color: #fff; }
+.wp-theme-help, .wp-theme-help code, .wp-footer-text { color: #e0ffff; }
+.wp-footer a { color: #fff; }

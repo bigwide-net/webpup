@@ -1,0 +1,23 @@
+/* webpup theme "sunset": a warm gradient behind frosted glass cards. */
+:root:root {
+    --wp-bg: #ffb48a;
+    --wp-surface: rgba(255, 255, 255, 0.68);
+    --wp-text: #2e1a33;
+    --wp-text-2: #4a2f4f;
+    --wp-muted: #7a5a72;
+    --wp-line: rgba(255, 255, 255, 0.75);
+    --wp-line-soft: rgba(120, 60, 90, 0.15);
+    --wp-accent: #c2410c;
+    --wp-on-accent: #ffffff;
+    --wp-banner: #f97316;
+    --wp-ui-font: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+    --wp-radius: 22px;
+    color-scheme: light;
+}
+body { background: linear-gradient(165deg, #ff7e5f 0%, #feb47b 38%, #c86dd7 75%, #6a3093 100%) fixed; }
+.wp-header, .wp-tabs, .wp-posts .postCard, .wp-about, .wp-following, .wp-contact, .wp-page, .wp-pages, .wp-notfound {
+    -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); box-shadow: 0 12px 40px rgba(80, 20, 60, 0.18);
+}
+.wp-avatar { border-color: rgba(255, 255, 255, 0.85); }
+.wp-footer, .wp-themes { border-top-color: rgba(255, 255, 255, 0.5); color: #3d2240; }
+.wp-tags li { background: rgba(255, 255, 255, 0.6); }

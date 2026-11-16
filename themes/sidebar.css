@@ -1,0 +1,35 @@
+/* webpup theme "sidebar": on wide screens the profile and the tabs stay in a column on the left,
+   the posts on the right. Shows that a theme can change the layout, not only the colors. */
+:root:root {
+    --wp-bg: #eef2f7;
+    --wp-surface: #ffffff;
+    --wp-text: #0f172a;
+    --wp-text-2: #334155;
+    --wp-muted: #64748b;
+    --wp-line: #dbe2ea;
+    --wp-line-soft: #e8edf3;
+    --wp-accent: #4f46e5;
+    --wp-on-accent: #ffffff;
+    --wp-banner: #6366f1;
+    --wp-ui-font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --wp-font: Charter, Georgia, serif;
+    --wp-radius: 14px;
+    color-scheme: light;
+}
+@media (min-width: 1000px) {
+    .wp-app {
+        max-width: 1200px; display: grid; grid-template-columns: 330px minmax(0, 1fr); grid-template-rows: auto auto 1fr;
+        column-gap: 36px; align-items: start;
+    }
+    .wp-header { grid-column: 1; grid-row: 1; border-bottom: 1px solid var(--wp-line); border-radius: var(--wp-radius); }
+    .wp-tabs { grid-column: 1; grid-row: 2; flex-direction: column; gap: 2px; margin-top: 14px; padding: 8px; border-radius: var(--wp-radius); border-top-color: var(--wp-line); }
+    .wp-tab { padding: 10px 12px; border-bottom: 0; border-left: 3px solid transparent; border-radius: 6px; }
+    .wp-tab[aria-current="page"] { border-left-color: var(--wp-accent); background: var(--wp-bg); }
+    .wp-main { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
+    .wp-themes, .wp-footer { grid-column: 2; }
+    .wp-head { --overlap: 44px; flex-direction: column; align-items: flex-start; }
+    .wp-avatar { width: 96px; height: 96px; }
+    .wp-actions { margin-top: 4px; }
+    .wp-name { font-size: 28px; }
+    .wp-summary { font-size: 17px; }
+}

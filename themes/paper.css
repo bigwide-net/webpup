@@ -1,0 +1,22 @@
+/* webpup theme "paper": warm paper, serif headings, square corners, posts as a column instead of cards. */
+:root:root {
+    --wp-bg: #f4efe4;
+    --wp-surface: #f4efe4;
+    --wp-text: #2b2620;
+    --wp-text-2: #4d463c;
+    --wp-muted: #7a7062;
+    --wp-line: #d6ccb8;
+    --wp-line-soft: #e3dccd;
+    --wp-accent: #8c3b2e;
+    --wp-on-accent: #fff;
+    --wp-banner: #c9b99a;
+    --wp-ui-font: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    --wp-radius: 0;
+    color-scheme: light;
+}
+.wp-header, .wp-tabs, .wp-posts .postCard, .wp-about, .wp-following, .wp-contact, .wp-notfound { border-left: 0; border-right: 0; }
+.wp-posts { gap: 0; }
+.wp-posts .postCard { border-top: 0; padding-left: 4px; padding-right: 4px; }
+.wp-name { font-weight: 600; font-style: italic; }
+.wp-avatar { border-radius: 0; }
+.wp-btn, .wp-follow .follow-label, .wp-follow-chevron, .wp-pager-link { border-radius: 0; }

@@ -1,0 +1,15 @@
+/* webpup theme "night": always dark, with a blue accent. */
+:root:root {
+    --wp-bg: #0e1116;
+    --wp-surface: #161b22;
+    --wp-text: #e6edf3;
+    --wp-text-2: #c2ccd6;
+    --wp-muted: #8d96a0;
+    --wp-line: #30363d;
+    --wp-line-soft: #21262d;
+    --wp-accent: #58a6ff;
+    --wp-on-accent: #0b1a2e;
+    --wp-banner: #1f3a5f;
+    --wp-error: #ff7b72;
+    color-scheme: dark;
+}

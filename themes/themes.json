@@ -1,0 +1,14 @@
+{
+  "themes": [
+    { "id": "paper", "title": "Paper", "description": "Warm paper, serif headings, square corners, no cards" },
+    { "id": "night", "title": "Night", "description": "Always dark, with a blue accent" },
+    { "id": "minimal", "title": "Minimal", "description": "No banner, no boxes, lots of white space" },
+    { "id": "newspaper", "title": "Newspaper", "description": "Centered masthead, serif type, rules and drop caps" },
+    { "id": "sidebar", "title": "Sidebar", "description": "Profile and tabs in a column on the left (wide screens)" },
+    { "id": "pastel", "title": "Pastel", "description": "Soft colors, round shapes, gentle shadows" },
+    { "id": "sunset", "title": "Sunset", "description": "Frosted glass cards on a warm gradient" },
+    { "id": "brutal", "title": "Brutal", "description": "Thick black lines, hard shadows, yellow" },
+    { "id": "terminal", "title": "Terminal", "description": "Green phosphor on black, all monospace" },
+    { "id": "retro", "title": "Retro", "description": "A home page from 1998" }
+  ]
+}

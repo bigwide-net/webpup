@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- webpup's probe looks for this line to find out whether the server rewrites /p/* to /index.html. Keep it. -->
+<meta name="generator" content="webpup">
+<title>Home</title>
+<link rel="alternate" type="application/feed+json" href="/feed.json" title="Posts">
+<!-- Absolute paths: the same file is served for /p/... URLs. webpup must be at the domain root. -->
+<link rel="stylesheet" href="/webpup.css">
+<link rel="stylesheet" href="/theme.css">
+<script src="/webpups.js" defer></script>
+</head>
+<body data-state="loading">
+<div id="wp-app" class="wp-app">
+<p class="wp-loading">Loading…</p>
+<noscript>
+<p class="wp-noscript">This page shows its posts and profile with JavaScript. Without it, the posts are in the feed <a href="/feed.json">/feed.json</a>, which any feed reader can follow, and the profile is in <a href="/.well-known/about.md">about.md</a>, <a href="/.well-known/contact.vcf">contact.vcf</a> and <a href="/.well-known/following.opml">following.opml</a>.</p>
+</noscript>
+</div>
+</body>
+</html>

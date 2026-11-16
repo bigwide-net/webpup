@@ -1,0 +1,37 @@
+/* webpup theme "minimal": no banner, no boxes, a narrow column and lots of white space. */
+:root:root {
+    --wp-bg: #ffffff;
+    --wp-surface: #ffffff;
+    --wp-text: #111111;
+    --wp-text-2: #444444;
+    --wp-muted: #888888;
+    --wp-line: #eeeeee;
+    --wp-line-soft: #f2f2f2;
+    --wp-accent: #111111;
+    --wp-on-accent: #ffffff;
+    --wp-ui-font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --wp-font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --wp-font-size: 18px;
+    --wp-width: 620px;
+    color-scheme: light;
+}
+.wp-app { padding-top: 56px; }
+.wp-banner { display: none; }
+.wp-header, .wp-tabs, .wp-posts .postCard, .wp-about, .wp-following, .wp-contact, .wp-page, .wp-pages, .wp-notfound { border: 0; border-radius: 0; background: transparent; }
+.wp-head { margin-top: 0; padding: 0; align-items: center; }
+.wp-avatar { width: 72px; height: 72px; border: 0; }
+.wp-actions { margin-top: 0; }
+.wp-id { padding: 20px 0 8px; }
+.wp-name { font-size: 26px; font-weight: 600; }
+.wp-summary { font-size: 17px; }
+.wp-tabs { padding: 0; gap: 20px; border-bottom: 1px solid var(--wp-line); }
+.wp-tab { padding: 12px 0 10px; font-weight: 500; border-bottom-width: 2px; }
+.wp-main { margin-top: 32px; }
+.wp-posts { gap: 56px; }
+.wp-posts .postCard { padding: 0; }
+.wp-posts .postFeed, .wp-posts .postMeta .postDivider:first-of-type { display: none; }
+.wp-post-actions { border-top: 0; padding-top: 0; opacity: 0.6; }
+.wp-about, .wp-following, .wp-contact, .wp-page, .wp-pages, .wp-notfound { padding: 0; }
+.wp-btn-accent, .wp-follow-chevron { background: #111; }
+.wp-btn, .wp-follow .follow-label, .wp-follow-chevron { height: 38px; font-weight: 500; }
+.wp-follow-chevron { width: 34px; }
